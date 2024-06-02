@@ -13,11 +13,11 @@ void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, doub
     }
 }
 
-#define x(i) x[i * incx]
+#define X(i) x[i * incx]
 
 void AddDot(int k, double* x, int incx, double* y, double* gamma){
     int p;
     for(p = 0; p < k; p++){
-        *gamma += x(p) * y[p];
+        *gamma += X(p) * y[p];
     }
 }
