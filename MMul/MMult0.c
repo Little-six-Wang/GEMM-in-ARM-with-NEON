@@ -1,6 +1,6 @@
-#define A(i, j) a[j * lda + i]
-#define B(i, j) b[j * ldb + i]
-#define C(i, j) c[j * ldc + i]
+#define A(i, j) a[(j) * lda + (i)]
+#define B(i, j) b[(j) * ldb + (i)]
+#define C(i, j) c[(j) * ldc + (i)]
 
 void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
     int i, j, p;

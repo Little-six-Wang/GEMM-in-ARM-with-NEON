@@ -1,6 +1,6 @@
-#define A(i, j) a[j * lda + i]
-#define B(i, j) b[j * ldb + i]
-#define C(i, j) c[j * ldc + i]
+#define A(i, j) a[(j) * lda + (i)]
+#define B(i, j) b[(j) * ldb + (i)]
+#define C(i, j) c[(j) * ldc + (i)]
 
 void AddDot(int, double*, int, double*, double*);
 
@@ -13,7 +13,7 @@ void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, doub
     }
 }
 
-#define X(i) x[i * incx]
+#define X(i) x[(i) * incx]
 
 void AddDot(int k, double* x, int incx, double* y, double* gamma){
     int p;
