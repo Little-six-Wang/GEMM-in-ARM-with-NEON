@@ -2,9 +2,9 @@
 #define B(i, j) b[(j) * ldb + (i)]
 #define C(i, j) c[(j) * ldc + (i)]
 
-void AddDot1x2(int, double*, int, double*, int, double*, int);
+void AddDot1x2(int, float*, int, float*, int, float*, int);
 
-void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
+void MY_MMult(int m,  int n, int k, float* a, int lda, float* b, int ldb, float* c, int ldc){
     int i, j;
     for(j = 0; j < n; j += 2){
         for(i = 0; i < m; i++){
@@ -13,7 +13,7 @@ void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, doub
     }
 }
 
-void AddDot1x2(int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
+void AddDot1x2(int k, float* a, int lda, float* b, int ldb, float* c, int ldc){
     int p;
     for(p = 0; p < k; p++){
         C(0, 0) += A(0, p) * B(p, 0);

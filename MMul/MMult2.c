@@ -2,9 +2,9 @@
 #define B(i, j) b[(j) * ldb + (i)]
 #define C(i, j) c[(j) * ldc + (i)]
 
-void AddDot(int, double*, int, double*, double*);
+void AddDot(int, float*, int, float*, float*);
 
-void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
+void MY_MMult(int m,  int n, int k, float* a, int lda, float* b, int ldb, float* c, int ldc){
     int i, j;
     for(j = 0; j < n; j += 2){
         for(i = 0; i < m; i++){
@@ -16,7 +16,7 @@ void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, doub
 
 #define X(i) x[(i) * incx]
 
-void AddDot(int k, double* x, int incx, double* y, double* gamma){
+void AddDot(int k, float* x, int incx, float* y, float* gamma){
     int p;
     for(p = 0; p < k; p++){
         *gamma += X(p) * y[p];

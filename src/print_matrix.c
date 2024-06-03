@@ -2,7 +2,7 @@
 
 #define A( i, j ) a[ (j)*lda + (i) ]
 
-void print_matrix( int m, int n, double *a, int lda )
+void print_matrix( int m, int n, float *a, int lda )
 {
   int i, j;
 
