@@ -2,7 +2,7 @@
 #define B( i, j ) b[ (j)*ldb + (i) ]
 #define abs( x ) ( (x) < 0.0 ? -(x) : (x) )
 
-double compare_matrices( int m, int n, float *a, int lda, float *b, int ldb )
+double compare_matrices( int m, int n, double *a, int lda, double *b, int ldb )
 {
   int i, j;
   double max_diff = 0.0, diff;

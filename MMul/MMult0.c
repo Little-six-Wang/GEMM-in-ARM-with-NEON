@@ -2,7 +2,7 @@
 #define B(i, j) b[(j) * ldb + (i)]
 #define C(i, j) c[(j) * ldc + (i)]
 
-void MY_MMult(int m,  int n, int k, float* a, int lda, float* b, int ldb, float* c, int ldc){
+void MY_MMult(int m,  int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
     int i, j, p;
     for(j = 0; j < n; j++){
         for(i = 0; i < m; i++){
