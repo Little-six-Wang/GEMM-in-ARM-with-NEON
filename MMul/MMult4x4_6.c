@@ -87,12 +87,3 @@ void AddDot4x4(int k, double* a, int lda, double* b, int ldb, double* c, int ldc
     C(3, 2) += c_32_reg;
     C(3, 3) += c_33_reg;
 }
-
-#define X(i) x[(i) * incx]
-
-void AddDot(int k, double* x, int incx, double* y, double* gamma){
-    int p;
-    for(p = 0; p < k; p++){
-        *gamma += X(p) * y[p];
-    }
-}

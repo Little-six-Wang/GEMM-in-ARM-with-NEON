@@ -38,12 +38,3 @@ void AddDot4x4(int k, double* a, int lda, double* b, int ldb, double* c, int ldc
         C(3, 3) += A(3, p) * B(p, 3);
     }
 }
-
-#define X(i) x[(i) * incx]
-
-void AddDot(int k, double* x, int incx, double* y, double* gamma){
-    int p;
-    for(p = 0; p < k; p++){
-        *gamma += X(p) * y[p];
-    }
-}
