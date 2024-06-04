@@ -15,6 +15,7 @@ void MY_MMult(int m, int n, int k, double* a, int lda, double* b, int ldb, doubl
 }
 
 void AddDot4x4(int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
+    
     AddDot(k, &A(0, 0), lda, &B(0, 0), &C(0, 0));
     AddDot(k, &A(0, 0), lda, &B(0, 1), &C(0, 1));
     AddDot(k, &A(0, 0), lda, &B(0, 2), &C(0, 2));
