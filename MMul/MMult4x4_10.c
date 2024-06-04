@@ -33,14 +33,14 @@ void AddDot4x4(int k, double* a, int lda, double* b, int ldb, double* c, int ldc
     double *b_p0_ptr, *b_p1_ptr, *b_p2_ptr, *b_p3_ptr;
 
     //init
-    c_00_10_vreg.v = vmov_n_f64(0.0);
-    c_01_11_vreg.v = vmov_n_f64(0.0);
-    c_02_12_vreg.v = vmov_n_f64(0.0);
-    c_03_13_vreg.v = vmov_n_f64(0.0);
-    c_20_30_vreg.v = vmov_n_f64(0.0);
-    c_21_31_vreg.v = vmov_n_f64(0.0);
-    c_22_32_vreg.v = vmov_n_f64(0.0);
-    c_23_33_vreg.v = vmov_n_f64(0.0);
+    c_00_10_vreg.v = vmovq_n_f64(0.0);
+    c_01_11_vreg.v = vmovq_n_f64(0.0);
+    c_02_12_vreg.v = vmovq_n_f64(0.0);
+    c_03_13_vreg.v = vmovq_n_f64(0.0);
+    c_20_30_vreg.v = vmovq_n_f64(0.0);
+    c_21_31_vreg.v = vmovq_n_f64(0.0);
+    c_22_32_vreg.v = vmovq_n_f64(0.0);
+    c_23_33_vreg.v = vmovq_n_f64(0.0);
 
     b_p0_ptr = &B(0, 0);
     b_p1_ptr = &B(0, 1);
@@ -56,15 +56,15 @@ void AddDot4x4(int k, double* a, int lda, double* b, int ldb, double* c, int ldc
         b_p2_vreg.v = vld1q_dup_f64(b_p2_ptr++);
         b_p3_vreg.v = vld1q_dup_f64(b_p3_ptr++);
 
-        c_00_10_vreg.v = vfmaq_f64(c_00_10_vreg.v, a_0p_1p_vreg.v, b_p0_vreg.v);
-        c_01_11_vreg.v = vfmaq_f64(c_01_11_vreg.v, a_0p_1p_vreg.v, b_p1_vreg.v);
-        c_02_12_vreg.v = vfmaq_f64(c_02_12_vreg.v, a_0p_1p_vreg.v, b_p2_vreg.v);
-        c_03_13_vreg.v = vfmaq_f64(c_03_13_vreg.v, a_0p_1p_vreg.v, b_p3_vreg.v);
+        c_00_10_vreg.v += a_0p_1p_vreg.v * b_p0_vreg.v;
+        c_01_11_vreg.v += a_0p_1p_vreg.v * b_p1_vreg.v;
+        c_02_12_vreg.v += a_0p_1p_vreg.v * b_p2_vreg.v;
+        c_03_13_vreg.v += a_0p_1p_vreg.v * b_p3_vreg.v;
 
-        c_20_30_vreg.v = vfmaq_f64(c_20_30_vreg.v, a_2p_3p_vreg.v, b_p0_vreg.v);
-        c_21_31_vreg.v = vfmaq_f64(c_21_31_vreg.v, a_2p_3p_vreg.v, b_p1_vreg.v);
-        c_22_32_vreg.v = vfmaq_f64(c_22_32_vreg.v, a_2p_3p_vreg.v, b_p2_vreg.v);
-        c_23_33_vreg.v = vfmaq_f64(c_23_33_vreg.v, a_2p_3p_vreg.v, b_p3_vreg.v);
+        c_20_30_vreg.v += a_2p_3p_vreg.v * b_p0_vreg.v;
+        c_21_31_vreg.v += a_2p_3p_vreg.v * b_p1_vreg.v;
+        c_22_32_vreg.v += a_2p_3p_vreg.v * b_p2_vreg.v;
+        c_23_33_vreg.v += a_2p_3p_vreg.v * b_p3_vreg.v;
     }
     C(0, 0) += c_00_10_vreg.d[0];
     C(0, 1) += c_01_11_vreg.d[0];
