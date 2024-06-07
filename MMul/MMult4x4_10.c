@@ -3,7 +3,6 @@
 #define C(i, j) c[(j) * ldc + (i)]
 
 void AddDot4x4(int, double*, int, double*, int, double*, int);
-void AddDot(int, double*, int, double*, double*);
 
 void MY_MMult(int m, int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
     int i, j;
@@ -56,15 +55,25 @@ void AddDot4x4(int k, double* a, int lda, double* b, int ldb, double* c, int ldc
         b_p2_vreg.v = vld1q_dup_f64(b_p2_ptr++);
         b_p3_vreg.v = vld1q_dup_f64(b_p3_ptr++);
 
-        c_00_10_vreg.v += a_0p_1p_vreg.v * b_p0_vreg.v;
-        c_01_11_vreg.v += a_0p_1p_vreg.v * b_p1_vreg.v;
-        c_02_12_vreg.v += a_0p_1p_vreg.v * b_p2_vreg.v;
-        c_03_13_vreg.v += a_0p_1p_vreg.v * b_p3_vreg.v;
+        // c_00_10_vreg.v += a_0p_1p_vreg.v * b_p0_vreg.v;
+        // c_01_11_vreg.v += a_0p_1p_vreg.v * b_p1_vreg.v;
+        // c_02_12_vreg.v += a_0p_1p_vreg.v * b_p2_vreg.v;
+        // c_03_13_vreg.v += a_0p_1p_vreg.v * b_p3_vreg.v;
 
-        c_20_30_vreg.v += a_2p_3p_vreg.v * b_p0_vreg.v;
-        c_21_31_vreg.v += a_2p_3p_vreg.v * b_p1_vreg.v;
-        c_22_32_vreg.v += a_2p_3p_vreg.v * b_p2_vreg.v;
-        c_23_33_vreg.v += a_2p_3p_vreg.v * b_p3_vreg.v;
+        // c_20_30_vreg.v += a_2p_3p_vreg.v * b_p0_vreg.v;
+        // c_21_31_vreg.v += a_2p_3p_vreg.v * b_p1_vreg.v;
+        // c_22_32_vreg.v += a_2p_3p_vreg.v * b_p2_vreg.v;
+        // c_23_33_vreg.v += a_2p_3p_vreg.v * b_p3_vreg.v;
+
+        c_00_10_vreg.v = vfmaq_f64(c_00_10_vreg.v, a_0p_1p_vreg.v, b_p0_vreg.v);
+        c_01_11_vreg.v = vfmaq_f64(c_01_11_vreg.v, a_0p_1p_vreg.v, b_p1_vreg.v);
+        c_02_12_vreg.v = vfmaq_f64(c_02_12_vreg.v, a_0p_1p_vreg.v, b_p2_vreg.v);
+        c_03_13_vreg.v = vfmaq_f64(c_03_13_vreg.v, a_0p_1p_vreg.v, b_p3_vreg.v);
+
+        c_20_30_vreg.v = vfmaq_f64(c_20_30_vreg.v, a_2p_3p_vreg.v, b_p0_vreg.v);
+        c_21_31_vreg.v = vfmaq_f64(c_21_31_vreg.v, a_2p_3p_vreg.v, b_p1_vreg.v);
+        c_22_32_vreg.v = vfmaq_f64(c_22_32_vreg.v, a_2p_3p_vreg.v, b_p2_vreg.v);
+        c_23_33_vreg.v = vfmaq_f64(c_23_33_vreg.v, a_2p_3p_vreg.v, b_p3_vreg.v);
     }
     C(0, 0) += c_00_10_vreg.d[0];
     C(0, 1) += c_01_11_vreg.d[0];
