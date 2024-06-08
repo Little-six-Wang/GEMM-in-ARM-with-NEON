@@ -59,6 +59,7 @@ void PackMatrixB(int k, double* b, int ldb, double* b_to){
     b_01_ptr = &B(0, 1);
     b_02_ptr = &B(0, 2);
     b_03_ptr = &B(0, 3);
+    printf("here\n");
     for(j = 0; j < k; j++){
         *b_to++ = *b_00_ptr++;
         *b_to++ = *b_01_ptr++;
