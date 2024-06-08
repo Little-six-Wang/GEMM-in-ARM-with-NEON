@@ -18,7 +18,7 @@ void MY_MMult(int m, int n, int k, double* a, int lda, double* b, int ldb, doubl
         ar = min(kc, k - j);
         for(i = 0; i < m; i += mc){
             ac = min(mc, m - i);
-            InnerKernel(ac, n, ar, &A(j, i), lda, &B(i, 0), ldb, &C(j, 0), ldc);  //mc x n
+            InnerKernel(ac, n, ar, &A(i, j), lda, &B(j, 0), ldb, &C(i, 0), ldc);  //mc x n
         }
     }
 }
