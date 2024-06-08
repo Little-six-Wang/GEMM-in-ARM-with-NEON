@@ -7,7 +7,7 @@
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
-void InnerKernel(int, int, int, double*, int, double*, int, double*, int, int);
+void InnerKernel(int, int, int, double*, int, double*, int, double*, int);
 void PackMatrixA(int, double*, int, double*);
 void PackMatrixB(int, double*, int, double*);
 void AddDot4x4(int, double*, int, double*, int, double*, int);
@@ -15,24 +15,21 @@ void AddDot4x4(int, double*, int, double*, int, double*, int);
 void MY_MMult(int m, int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
     int ar, ac;
     int i, j;
-    int flag;
     for(j = 0; j < k; j += kc){
         ar = min(kc, k - j);
         for(i = 0; i < m; i += mc){
             ac = min(mc, m - i);
-            InnerKernel(ac, n, ar, &A(i, j), lda, &B(j, 0), ldb, &C(i, 0), ldc, i == 0);  //mc x n
+            InnerKernel(ac, n, ar, &A(i, j), lda, &B(j, 0), ldb, &C(i, 0), ldc);  //mc x n
         }
     }
 }
 
-void InnerKernel(int m, int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc, int flag){
+void InnerKernel(int m, int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
     int i, j;
     double packedA[m * k]; //mc * kc
     double packedB[k * n];
     for(j = 0; j < n; j += 4){
-        if(flag){
-            PackMatrixB(k, &B(0, j), ldb, &packedB[j * k]);
-        }
+        PackMatrixB(k, &B(0, j), ldb, &packedB[j * k]);
         for(i = 0; i < m; i += 4){
             if(j == 0){
                 PackMatrixA(k, &A(i, 0), lda, &packedA[i * k]);
