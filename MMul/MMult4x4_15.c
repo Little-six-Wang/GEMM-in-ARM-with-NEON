@@ -24,6 +24,7 @@ void MY_MMult(int m, int n, int k, double* a, int lda, double* b, int ldb, doubl
     }
 }
 
+
 void InnerKernel(int m, int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc){
     int i, j;
     double packedA[m * k]; //mc * kc
