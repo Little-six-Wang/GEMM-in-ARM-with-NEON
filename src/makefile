@@ -1,4 +1,4 @@
-OLD  := MMult4x4_15
+OLD  := MMult4x4_14
 NEW  := MMult4x4_16
 #
 # sample makefile
@@ -32,11 +32,11 @@ test_MMult.x: $(TEST_OBJS) $(UTIL) parameters.h
         $(BLAS_LIB) -o $(TEST_BIN) $@ 
 
 run:	
-	make all
+	#make all
 	export OMP_NUM_THREADS=1
 	export GOTO_NUM_THREADS=1
-	echo "version = '$(NEW)';" > output_$(NEW).m
-	./test_MMult.x >> output_$(NEW).m
+	#echo "version = '$(NEW)';" > output_$(NEW).m
+	#./test_MMult.x >> output_$(NEW).m
 	cp output_$(OLD).m output_old.m
 	cp output_$(NEW).m output_new.m
 

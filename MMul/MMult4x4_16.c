@@ -4,9 +4,11 @@
 
 #define mc 256
 #define kc 128
-#define nb 1000
+#define nb 1160
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
+
+double packedB[kc * nb];
 
 void InnerKernel(int, int, int, double*, int, double*, int, double*, int, int);
 void PackMatrixA(int, double*, int, double*);
@@ -28,7 +30,6 @@ void MY_MMult(int m, int n, int k, double* a, int lda, double* b, int ldb, doubl
 void InnerKernel(int m, int n, int k, double* a, int lda, double* b, int ldb, double* c, int ldc, int flag){
     int i, j;
     double packedA[m * k]; //mc * kc
-    static double packedB[kc * nb];
     for(j = 0; j < n; j += 4){
         if(flag){
             PackMatrixB(k, &B(0, j), ldb, &packedB[j * k]);
