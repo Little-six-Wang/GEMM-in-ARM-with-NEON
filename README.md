@@ -3,6 +3,6 @@
 # 如何绘制性能对比图
 你只需要在make run后，在`octave`中运行`PlotAll`
 # 关于makefile
-你只需要修改`OLD`和`NEW`中的内容
+你只需要修改`OLD`和`NEW`中的内容\n
 `OLD`：你上一次
 `NEW`：
